@@ -259,6 +259,8 @@ func (pc *PolicyContext) GetSignaturesWithAcceptedAuthor(ctx context.Context, pu
 // WARNING: This validates signatures and the manifest, but does not download or validate the
 // layers. Users must validate that the layers match their expected digests.
 func (pc *PolicyContext) IsRunningImageAllowed(ctx context.Context, publicImage types.UnparsedImage) (res bool, finalErr error) {
+	// err =
+	// return false, err
 	if err := pc.changeState(pcReady, pcInUse); err != nil {
 		return false, err
 	}

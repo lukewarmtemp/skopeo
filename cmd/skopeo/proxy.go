@@ -216,6 +216,7 @@ func (h *proxyHandler) Initialize(args []any) (replyBuf, error) {
 // OpenImage accepts a string image reference i.e. TRANSPORT:REF - like `skopeo copy`.
 // The return value is an opaque integer handle.
 func (h *proxyHandler) OpenImage(args []any) (replyBuf, error) {
+	fmt.Printf("hello")
 	return h.openImageImpl(args, false)
 }
 

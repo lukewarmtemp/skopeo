@@ -231,6 +231,7 @@ type byteFetch struct {
 
 func runTestGetManifestAndConfig(p *proxy, img string) error {
 	v, err := p.callNoFd("OpenImage", []any{img})
+	// fmt.Printf("OpenImage(%s) = %v, %v\n", img, v, err)
 	if err != nil {
 		return err
 	}
@@ -341,6 +342,7 @@ func (s *proxySuite) TestProxy() {
 	if err != nil {
 		err = fmt.Errorf("Testing image %s: %v", knownNotManifestListedImageX8664, err)
 	}
+	// err = fmt.Errorf("Skipping test of %s: %v", knownNotManifestListedImageX8664, err)
 	assert.NoError(t, err)
 
 	err = runTestGetManifestAndConfig(p, knownListImage)
