@@ -274,7 +274,6 @@ func (pc *PolicyContext) IsRunningImageAllowed(ctx context.Context, publicImage 
 
 	logrus.Debugf("IsRunningImageAllowed for image %s", policyIdentityLogName(image.Reference()))
 	reqs := pc.requirementsForImageRef(image.Reference())
-	log.Println(reqs)
 
 	if len(reqs) == 0 {
 		return false, PolicyRequirementError("List of verification policy requirements must not be empty")
@@ -288,6 +287,7 @@ func (pc *PolicyContext) IsRunningImageAllowed(ctx context.Context, publicImage 
 			return false, err
 		}
 		logrus.Debugf(" Requirement %d: allowed", reqNumber)
+		log.Println(" Requirement %d: allowed", reqNumber)
 	}
 	// We have tested that len(reqs) != 0, so at least one req must have explicitly allowed this image.
 	logrus.Debugf("Overall: allowed")
