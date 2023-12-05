@@ -270,7 +270,6 @@ func (h *proxyHandler) openImageImpl(args []any, allowNotFound bool) (retReplyBu
 	}
 
 	policyContext, err := h.opts.global.getPolicyContext()
-	log.Println(policyContext)
 	if err != nil {
 		return ret, err
 	}
@@ -281,6 +280,7 @@ func (h *proxyHandler) openImageImpl(args []any, allowNotFound bool) (retReplyBu
 	}()
 
 	unparsedTopLevel := image.UnparsedInstance(imgsrc, nil)
+	log.Println(context.Background())
 	allowed, err := policyContext.IsRunningImageAllowed(context.Background(), unparsedTopLevel)
 	if err != nil {
 		return ret, err
