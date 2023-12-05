@@ -76,6 +76,7 @@ import (
 	ocilayout "github.com/containers/image/v5/oci/layout"
 	"github.com/containers/image/v5/pkg/blobinfocache"
 	"github.com/containers/image/v5/transports"
+	"github.com/containers/image/v5/transports/alltransports"
 	"github.com/containers/image/v5/types"
 	dockerdistributionerrcode "github.com/docker/distribution/registry/api/errcode"
 	dockerdistributionapi "github.com/docker/distribution/registry/api/v2"
@@ -243,58 +244,58 @@ func (h *proxyHandler) openImageImpl(args []any, allowNotFound bool) (retReplyBu
 	defer h.lock.Unlock()
 	var ret replyBuf
 
-	// if h.sysctx == nil {
-	// 	return ret, fmt.Errorf("client error: must invoke Initialize")
-	// }
-	// if len(args) != 1 {
-	// 	return ret, fmt.Errorf("invalid request, expecting one argument")
-	// }
-	// imageref, ok := args[0].(string)
-	// if !ok {
-	// 	return ret, fmt.Errorf("expecting string imageref, not %T", args[0])
-	// }
+	if h.sysctx == nil {
+		return ret, fmt.Errorf("client error: must invoke Initialize")
+	}
+	if len(args) != 1 {
+		return ret, fmt.Errorf("invalid request, expecting one argument")
+	}
+	imageref, ok := args[0].(string)
+	if !ok {
+		return ret, fmt.Errorf("expecting string imageref, not %T", args[0])
+	}
 
-	// imgRef, err := alltransports.ParseImageName(imageref)
-	// if err != nil {
-	// 	return ret, err
-	// }
-	// imgsrc, err := imgRef.NewImageSource(context.Background(), h.sysctx)
-	// if err != nil {
-	// 	if allowNotFound && isNotFoundImageError(err) {
-	// 		ret.value = sentinelImageID
-	// 		return ret, nil
-	// 	}
-	// 	return ret, err
-	// }
+	imgRef, err := alltransports.ParseImageName(imageref)
+	if err != nil {
+		return ret, err
+	}
+	imgsrc, err := imgRef.NewImageSource(context.Background(), h.sysctx)
+	if err != nil {
+		if allowNotFound && isNotFoundImageError(err) {
+			ret.value = sentinelImageID
+			return ret, nil
+		}
+		return ret, err
+	}
 
-	// policyContext, err := h.opts.global.getPolicyContext()
-	// if err != nil {
-	// 	return ret, err
-	// }
-	// defer func() {
-	// 	if err := policyContext.Destroy(); err != nil {
-	// 		retErr = noteCloseFailure(retErr, "tearing down policy context", err)
-	// 	}
-	// }()
+	policyContext, err := h.opts.global.getPolicyContext()
+	if err != nil {
+		return ret, err
+	}
+	defer func() {
+		if err := policyContext.Destroy(); err != nil {
+			retErr = noteCloseFailure(retErr, "tearing down policy context", err)
+		}
+	}()
 
-	// unparsedTopLevel := image.UnparsedInstance(imgsrc, nil)
-	// allowed, err := policyContext.IsRunningImageAllowed(context.Background(), unparsedTopLevel)
-	// if err != nil {
-	// 	return ret, err
-	// }
-	// if !allowed {
-	// 	return ret, fmt.Errorf("internal inconsistency: policy verification failed without returning an error")
-	// }
+	unparsedTopLevel := image.UnparsedInstance(imgsrc, nil)
+	allowed, err := policyContext.IsRunningImageAllowed(context.Background(), unparsedTopLevel)
+	if err != nil {
+		return ret, err
+	}
+	if !allowed {
+		return ret, fmt.Errorf("internal inconsistency: policy verification failed without returning an error")
+	}
 
-	// // Note that we never return zero as an imageid; this code doesn't yet
-	// // handle overflow though.
-	// h.imageSerial++
-	// openimg := &openImage{
-	// 	id:  h.imageSerial,
-	// 	src: imgsrc,
-	// }
-	// h.images[openimg.id] = openimg
-	// ret.value = openimg.id
+	// Note that we never return zero as an imageid; this code doesn't yet
+	// handle overflow though.
+	h.imageSerial++
+	openimg := &openImage{
+		id:  h.imageSerial,
+		src: imgsrc,
+	}
+	h.images[openimg.id] = openimg
+	ret.value = openimg.id
 
 	return ret, nil
 }
