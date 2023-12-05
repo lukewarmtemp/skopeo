@@ -8,6 +8,7 @@ package signature
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/containers/image/v5/internal/private"
 	"github.com/containers/image/v5/internal/unparsedimage"
@@ -259,8 +260,6 @@ func (pc *PolicyContext) GetSignaturesWithAcceptedAuthor(ctx context.Context, pu
 // WARNING: This validates signatures and the manifest, but does not download or validate the
 // layers. Users must validate that the layers match their expected digests.
 func (pc *PolicyContext) IsRunningImageAllowed(ctx context.Context, publicImage types.UnparsedImage) (res bool, finalErr error) {
-	// err =
-	// return false, err
 	if err := pc.changeState(pcReady, pcInUse); err != nil {
 		return false, err
 	}
@@ -275,6 +274,7 @@ func (pc *PolicyContext) IsRunningImageAllowed(ctx context.Context, publicImage 
 
 	logrus.Debugf("IsRunningImageAllowed for image %s", policyIdentityLogName(image.Reference()))
 	reqs := pc.requirementsForImageRef(image.Reference())
+	log.Println(reqs)
 
 	if len(reqs) == 0 {
 		return false, PolicyRequirementError("List of verification policy requirements must not be empty")
