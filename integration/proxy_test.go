@@ -25,6 +25,8 @@ const knownNotManifestListedImageX8664 = "docker://quay.io/coreos/11bot"
 // knownNotExtantImage would be very surprising if it did exist
 const knownNotExtantImage = "docker://quay.io/centos/centos:opensusewindowsubuntu"
 
+const signedImage = "docker://ghcr.io/ublue-os/kinoite-nvidia"
+
 const expectedProxySemverMajor = "0.2"
 
 // request is copied from proxy.go
@@ -354,6 +356,12 @@ func (s *proxySuite) TestProxy() {
 	err = runTestOpenImageOptionalNotFound(p, knownNotExtantImage)
 	if err != nil {
 		err = fmt.Errorf("Testing optional image %s: %v", knownNotExtantImage, err)
+	}
+	assert.NoError(t, err)
+
+	err = runTestOpenImageOptionalNotFound(p, signedImage)
+	if err != nil {
+		err = fmt.Errorf("Testing optional image %s: %v", signedImage, err)
 	}
 	assert.NoError(t, err)
 }
