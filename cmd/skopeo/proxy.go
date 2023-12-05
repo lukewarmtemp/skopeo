@@ -70,6 +70,7 @@ import (
 	"os"
 	"sync"
 	"syscall"
+	"testing"
 
 	"github.com/containers/image/v5/image"
 	"github.com/containers/image/v5/manifest"
@@ -215,7 +216,8 @@ func (h *proxyHandler) Initialize(args []any) (replyBuf, error) {
 
 // OpenImage accepts a string image reference i.e. TRANSPORT:REF - like `skopeo copy`.
 // The return value is an opaque integer handle.
-func (h *proxyHandler) OpenImage(args []any) (replyBuf, error) {
+func (h *proxyHandler) OpenImage(args []any, t *testing.T) (replyBuf, error) {
+	t.Error("Hello")
 	fmt.Printf("hello")
 	return h.openImageImpl(args, false)
 }
