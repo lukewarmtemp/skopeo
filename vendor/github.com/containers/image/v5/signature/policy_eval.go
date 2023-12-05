@@ -281,13 +281,15 @@ func (pc *PolicyContext) IsRunningImageAllowed(ctx context.Context, publicImage 
 
 	for reqNumber, req := range reqs {
 		// FIXME: supply state
+		// tmpMap := map[string]*PolicyRequirements{}
+		log.Printf("%+v\n", req)
+
 		allowed, err := req.isRunningImageAllowed(ctx, image)
 		if !allowed {
 			logrus.Debugf("Requirement %d: denied, done", reqNumber)
 			return false, err
 		}
 		logrus.Debugf(" Requirement %d: allowed", reqNumber)
-		log.Printf(" Requirement %d: allowed", reqNumber)
 	}
 	// We have tested that len(reqs) != 0, so at least one req must have explicitly allowed this image.
 	logrus.Debugf("Overall: allowed")
