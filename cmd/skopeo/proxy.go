@@ -270,7 +270,7 @@ func (h *proxyHandler) openImageImpl(args []any, allowNotFound bool) (retReplyBu
 
 	policyContext, err := h.opts.global.getPolicyContext()
 	log.Printf("Enter")
-	log.Printf("%+v\n", policyContext)
+	log.Printf("%+v\n", policyContext.Policy)
 	log.Printf("Exit")
 	if err != nil {
 		return ret, err
