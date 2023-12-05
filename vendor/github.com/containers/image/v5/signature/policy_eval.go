@@ -282,7 +282,9 @@ func (pc *PolicyContext) IsRunningImageAllowed(ctx context.Context, publicImage 
 	for reqNumber, req := range reqs {
 		// FIXME: supply state
 		// tmpMap := map[string]*PolicyRequirements{}
+		log.Printf("Enter")
 		log.Printf("%+v\n", req)
+		log.Printf("Exit")
 
 		allowed, err := req.isRunningImageAllowed(ctx, image)
 		if !allowed {
