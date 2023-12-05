@@ -359,7 +359,7 @@ func (s *proxySuite) TestProxy() {
 	}
 	assert.NoError(t, err)
 
-	err = runTestOpenImageOptionalNotFound(p, signedImage)
+	err = runTestGetManifestAndConfig(p, signedImage)
 	if err != nil {
 		err = fmt.Errorf("Testing optional image %s: %v", signedImage, err)
 	}
