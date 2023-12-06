@@ -247,6 +247,7 @@ func (pr *prSigstoreSigned) isRunningImageAllowed(ctx context.Context, image pri
 		switch res, err := pr.isSignatureAccepted(ctx, image, sigstoreSig); res {
 		case sarAccepted:
 			// One accepted signature is enough.
+			log.Printf("accepted")
 			return true, nil
 		case sarRejected:
 			log.Printf("rejected")
