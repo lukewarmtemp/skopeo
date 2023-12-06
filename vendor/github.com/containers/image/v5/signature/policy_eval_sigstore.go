@@ -232,6 +232,7 @@ func (pr *prSigstoreSigned) isRunningImageAllowed(ctx context.Context, image pri
 	var rejections []error
 	foundNonSigstoreSignatures := 0
 	foundSigstoreNonAttachments := 0
+	log.Printf("HELLOOO")
 	for _, s := range sigs {
 		sigstoreSig, ok := s.(signature.Sigstore)
 		if !ok {
