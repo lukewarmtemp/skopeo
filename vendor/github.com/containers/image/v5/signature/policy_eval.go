@@ -272,6 +272,7 @@ func (pc *PolicyContext) IsRunningImageAllowed(ctx context.Context, publicImage 
 
 	image := unparsedimage.FromPublic(publicImage)
 
+	log.Printf("IsRunningImageAllowed for image %s", policyIdentityLogName(image.Reference()))
 	logrus.Debugf("IsRunningImageAllowed for image %s", policyIdentityLogName(image.Reference()))
 	reqs := pc.requirementsForImageRef(image.Reference())
 
