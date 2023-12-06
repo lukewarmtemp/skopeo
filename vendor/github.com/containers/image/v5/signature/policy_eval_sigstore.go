@@ -9,6 +9,7 @@ import (
 	"crypto/x509"
 	"errors"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 
@@ -248,8 +249,10 @@ func (pr *prSigstoreSigned) isRunningImageAllowed(ctx context.Context, image pri
 			// One accepted signature is enough.
 			return true, nil
 		case sarRejected:
+			log.Printf("rejected")
 			reason = err
 		case sarUnknown:
+			log.Printf("unknown")
 			// Huh?! This should not happen at all; treat it as any other invalid value.
 			fallthrough
 		default:
