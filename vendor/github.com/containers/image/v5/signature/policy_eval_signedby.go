@@ -6,7 +6,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 
@@ -117,17 +116,13 @@ func (pr *prSignedBy) isRunningImageAllowed(ctx context.Context, image private.U
 		switch res, _, err := pr.isSignatureAuthorAccepted(ctx, image, s); res {
 		case sarAccepted:
 			// One accepted signature is enough.
-			log.Printf("accepted")
 			return true, nil
 		case sarRejected:
-			log.Printf("rejected")
 			reason = err
 		case sarUnknown:
-			log.Printf("unknown")
 			// Huh?! This should not happen at all; treat it as any other invalid value.
 			fallthrough
 		default:
-			log.Printf("default")
 			reason = fmt.Errorf(`Internal error: Unexpected signature verification result "%s"`, string(res))
 		}
 		rejections = append(rejections, reason)
