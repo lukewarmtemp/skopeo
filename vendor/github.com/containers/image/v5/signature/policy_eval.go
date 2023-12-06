@@ -276,6 +276,7 @@ func (pc *PolicyContext) IsRunningImageAllowed(ctx context.Context, publicImage 
 	reqs := pc.requirementsForImageRef(image.Reference())
 
 	if len(reqs) == 0 {
+		logrus.Debugf("Zero")
 		return false, PolicyRequirementError("List of verification policy requirements must not be empty")
 	}
 
