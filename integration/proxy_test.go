@@ -25,7 +25,7 @@ const knownNotManifestListedImageX8664 = "docker://quay.io/coreos/11bot"
 // knownNotExtantImage would be very surprising if it did exist
 const knownNotExtantImage = "docker://quay.io/centos/centos:opensusewindowsubuntu"
 
-const signedImage = "docker://ghcr.io/jmpolom/fedora-silverblue-ws@sha256:48bb3ee03f4687f86ac0c4d095e096dfa547003321f2519f2d547a2a7dd81ab0 "
+const signedImage = "docker://ghcr.io/jmpolom/fedora-silverblue-ws@sha256:48bb3ee03f4687f86ac0c4d095e096dfa547003321f2519f2d547a2a7dd81ab0"
 
 const expectedProxySemverMajor = "0.2"
 
