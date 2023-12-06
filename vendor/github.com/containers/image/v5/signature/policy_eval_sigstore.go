@@ -267,7 +267,7 @@ func (pr *prSigstoreSigned) isRunningImageAllowed(ctx context.Context, image pri
 	case 0:
 		if foundNonSigstoreSignatures == 0 && foundSigstoreNonAttachments == 0 {
 			// A nice message for the most common case.
-			summary = PolicyRequirementError("A signature was required, but no signature exists")
+			summary = PolicyRequirementError("A signature was required, but no signature exists!!!")
 		} else {
 			summary = PolicyRequirementError(fmt.Sprintf("A signature was required, but no signature exists (%d non-sigstore signatures, %d sigstore non-signature attachments)",
 				foundNonSigstoreSignatures, foundSigstoreNonAttachments))
