@@ -237,6 +237,7 @@ func (pr *prSigstoreSigned) isRunningImageAllowed(ctx context.Context, image pri
 	log.Printf("%v", foundSigstoreNonAttachments)
 	log.Printf("%v", sigs)
 	for _, s := range sigs {
+		log.Printf("HELLO2")
 		sigstoreSig, ok := s.(signature.Sigstore)
 		if !ok {
 			foundNonSigstoreSignatures++
@@ -246,7 +247,7 @@ func (pr *prSigstoreSigned) isRunningImageAllowed(ctx context.Context, image pri
 			foundSigstoreNonAttachments++
 			continue
 		}
-		log.Printf("HELLO2")
+		log.Printf("HELLO3")
 
 		var reason error
 		switch res, err := pr.isSignatureAccepted(ctx, image, sigstoreSig); res {
