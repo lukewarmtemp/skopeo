@@ -451,6 +451,7 @@ func (s *dockerImageSource) manifestDigest(ctx context.Context, instanceDigest *
 // getSignaturesFromLookaside implements GetSignaturesWithFormat() from the lookaside location configured in s.c.signatureBase,
 // which is not nil.
 func (s *dockerImageSource) getSignaturesFromLookaside(ctx context.Context, instanceDigest *digest.Digest) ([]signature.Signature, error) {
+	log.Printf("getSignaturesFromLookaside")
 	manifestDigest, err := s.manifestDigest(ctx, instanceDigest)
 	if err != nil {
 		return nil, err
@@ -465,6 +466,7 @@ func (s *dockerImageSource) getSignaturesFromLookaside(ctx context.Context, inst
 
 		sigURL := lookasideStorageURL(s.c.signatureBase, manifestDigest, i)
 		signature, missing, err := s.getOneSignature(ctx, sigURL)
+		log.Printf("%v", signature)
 		if err != nil {
 			return nil, err
 		}
