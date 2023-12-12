@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 
 	"github.com/containers/image/v5/docker"
@@ -102,6 +103,7 @@ func (s *openshiftImageSource) GetBlob(ctx context.Context, info types.BlobInfo,
 // (when the primary manifest is a manifest list); this never happens if the primary manifest is not a manifest list
 // (e.g. if the source never returns manifest lists).
 func (s *openshiftImageSource) GetSignaturesWithFormat(ctx context.Context, instanceDigest *digest.Digest) ([]signature.Signature, error) {
+	log.Printf("openshiftImageSource")
 	var imageStreamImageName string
 	if instanceDigest == nil {
 		if err := s.ensureImageIsResolved(ctx); err != nil {

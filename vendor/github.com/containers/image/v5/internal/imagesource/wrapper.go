@@ -2,6 +2,7 @@ package imagesource
 
 import (
 	"context"
+	"log"
 
 	"github.com/containers/image/v5/internal/imagesource/stubs"
 	"github.com/containers/image/v5/internal/private"
@@ -44,6 +45,7 @@ func FromPublic(src types.ImageSource) private.ImageSource {
 // (when the primary manifest is a manifest list); this never happens if the primary manifest is not a manifest list
 // (e.g. if the source never returns manifest lists).
 func (w *wrapped) GetSignaturesWithFormat(ctx context.Context, instanceDigest *digest.Digest) ([]signature.Signature, error) {
+	log.Printf("wrapped")
 	sigs, err := w.GetSignatures(ctx, instanceDigest)
 	if err != nil {
 		return nil, err

@@ -2,6 +2,7 @@ package impl
 
 import (
 	"context"
+	"log"
 
 	"github.com/containers/image/v5/internal/signature"
 	"github.com/opencontainers/go-digest"
@@ -15,5 +16,6 @@ type NoSignatures struct{}
 // (when the primary manifest is a manifest list); this never happens if the primary manifest is not a manifest list
 // (e.g. if the source never returns manifest lists).
 func (stub NoSignatures) GetSignaturesWithFormat(ctx context.Context, instanceDigest *digest.Digest) ([]signature.Signature, error) {
+	log.Printf("NoSignatures")
 	return nil, nil
 }

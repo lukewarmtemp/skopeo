@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log"
 	"os"
 
 	"github.com/containers/image/v5/internal/imagesource/impl"
@@ -82,6 +83,7 @@ func (s *dirImageSource) GetBlob(ctx context.Context, info types.BlobInfo, cache
 // (when the primary manifest is a manifest list); this never happens if the primary manifest is not a manifest list
 // (e.g. if the source never returns manifest lists).
 func (s *dirImageSource) GetSignaturesWithFormat(ctx context.Context, instanceDigest *digest.Digest) ([]signature.Signature, error) {
+	log.Printf("dirImageSource")
 	signatures := []signature.Signature{}
 	for i := 0; ; i++ {
 		path := s.ref.signaturePath(i, instanceDigest)
