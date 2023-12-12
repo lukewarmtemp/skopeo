@@ -397,11 +397,11 @@ func (s *dockerImageSource) GetBlob(ctx context.Context, info types.BlobInfo, ca
 // (e.g. if the source never returns manifest lists).
 func (s *dockerImageSource) GetSignaturesWithFormat(ctx context.Context, instanceDigest *digest.Digest) ([]signature.Signature, error) {
 	log.Printf("dockerImageSource")
+	s.c.supportsSignatures = true
 	if err := s.c.detectProperties(ctx); err != nil {
 		return nil, err
 	}
 	var res []signature.Signature
-	s.c.supportsSignatures = true
 	switch {
 	case s.c.supportsSignatures:
 		sigs, err := s.getSignaturesFromAPIExtension(ctx, instanceDigest)
