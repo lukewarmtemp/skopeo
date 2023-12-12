@@ -506,7 +506,7 @@ func (s *dockerImageSource) getOneSignature(ctx context.Context, sigURL *url.URL
 		logrus.Debugf("GET %s", sigURL.Redacted())
 		req, err := http.NewRequestWithContext(ctx, http.MethodGet, sigURL.String(), nil)
 		log.Printf("output req")
-		log.Printf("%v", req)
+		// log.Printf("%v", req)
 		if err != nil {
 			return nil, false, err
 		}
