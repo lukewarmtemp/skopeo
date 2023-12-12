@@ -27,9 +27,9 @@ const knownNotExtantImage = "docker://quay.io/centos/centos:opensusewindowsubunt
 
 // const signedImage = "docker://ghcr.io/ublue-os/kinoite-nvidia:38"
 
-const signedImage = "docker://ghcr.io/lukewarmtemp/fcos-signed:latest"
+// const signedImage = "docker://ghcr.io/lukewarmtemp/fcos-signed:latest"
 
-// const signedImage = "docker://quay.io/luyang/manual-fcos-signed:latest"
+const signedImage = "docker://quay.io/luyang/manual-fcos-signed:latest"
 
 const expectedProxySemverMajor = "0.2"
 
