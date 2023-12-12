@@ -225,6 +225,7 @@ func (pr *prSigstoreSigned) isSignatureAccepted(ctx context.Context, image priva
 }
 
 func (pr *prSigstoreSigned) isRunningImageAllowed(ctx context.Context, image private.UnparsedImage) (bool, error) {
+	log.Printf("HELLO0")
 	sigs, err := image.UntrustedSignatures(ctx)
 	if err != nil {
 		return false, err
