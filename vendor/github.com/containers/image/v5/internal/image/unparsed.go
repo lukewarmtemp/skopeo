@@ -3,6 +3,7 @@ package image
 import (
 	"context"
 	"fmt"
+	"log"
 
 	"github.com/containers/image/v5/docker/reference"
 	"github.com/containers/image/v5/internal/imagesource"
@@ -108,11 +109,14 @@ func (i *UnparsedImage) Signatures(ctx context.Context) ([][]byte, error) {
 
 // UntrustedSignatures is like ImageSource.GetSignaturesWithFormat, but the result is cached; it is OK to call this however often you need.
 func (i *UnparsedImage) UntrustedSignatures(ctx context.Context) ([]signature.Signature, error) {
+	log.Printf("HELLO0.1")
 	if i.cachedSignatures == nil {
+		log.Printf("HELLO0.2")
 		sigs, err := i.src.GetSignaturesWithFormat(ctx, i.instanceDigest)
 		if err != nil {
 			return nil, err
 		}
+		log.Printf("HELLO0.3")
 		i.cachedSignatures = sigs
 	}
 	return i.cachedSignatures, nil
