@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"mime"
 	"mime/multipart"
 	"net/http"
@@ -395,6 +396,7 @@ func (s *dockerImageSource) GetBlob(ctx context.Context, info types.BlobInfo, ca
 // (when the primary manifest is a manifest list); this never happens if the primary manifest is not a manifest list
 // (e.g. if the source never returns manifest lists).
 func (s *dockerImageSource) GetSignaturesWithFormat(ctx context.Context, instanceDigest *digest.Digest) ([]signature.Signature, error) {
+	log.Printf("dockerImageSource")
 	if err := s.c.detectProperties(ctx); err != nil {
 		return nil, err
 	}

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 
 	"github.com/containers/image/v5/internal/imagesource"
 	"github.com/containers/image/v5/internal/imagesource/impl"
@@ -158,6 +159,7 @@ func (s *ociArchiveImageSource) GetBlobAt(ctx context.Context, info types.BlobIn
 // (when the primary manifest is a manifest list); this never happens if the primary manifest is not a manifest list
 // (e.g. if the source never returns manifest lists).
 func (s *ociArchiveImageSource) GetSignaturesWithFormat(ctx context.Context, instanceDigest *digest.Digest) ([]signature.Signature, error) {
+	log.Printf("ociArchiveImageSource")
 	return s.unpackedSrc.GetSignaturesWithFormat(ctx, instanceDigest)
 }
 
