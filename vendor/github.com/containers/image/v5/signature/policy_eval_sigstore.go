@@ -241,6 +241,7 @@ func (pr *prSigstoreSigned) isRunningImageAllowed(ctx context.Context, image pri
 		log.Printf("enter")
 		log.Printf("- %d\n", value)
 	}
+	log.Printf("exit")
 
 	for _, s := range sigs {
 		log.Printf("HELLO2")
