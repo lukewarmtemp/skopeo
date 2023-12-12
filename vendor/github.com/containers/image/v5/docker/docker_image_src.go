@@ -490,8 +490,6 @@ func (s *dockerImageSource) getOneSignature(ctx context.Context, sigURL *url.URL
 	case "file":
 		logrus.Debugf("Reading %s", sigURL.Path)
 		sigBlob, err := os.ReadFile(sigURL.Path)
-		log.Printf("output sigBlob")
-		log.Printf("%v", sigBlob)
 		if err != nil {
 			if os.IsNotExist(err) {
 				return nil, true, nil
@@ -507,6 +505,8 @@ func (s *dockerImageSource) getOneSignature(ctx context.Context, sigURL *url.URL
 	case "http", "https":
 		logrus.Debugf("GET %s", sigURL.Redacted())
 		req, err := http.NewRequestWithContext(ctx, http.MethodGet, sigURL.String(), nil)
+		log.Printf("output req")
+		log.Printf("%v", req)
 		if err != nil {
 			return nil, false, err
 		}
