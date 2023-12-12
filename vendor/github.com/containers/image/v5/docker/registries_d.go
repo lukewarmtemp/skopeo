@@ -289,6 +289,6 @@ func (ns registryNamespace) signatureTopLevel(write bool) string {
 func lookasideStorageURL(base lookasideStorageBase, manifestDigest digest.Digest, index int) *url.URL {
 	sigURL := *base
 	sigURL.Path = fmt.Sprintf("%s@%s=%s/signature-%d", sigURL.Path, manifestDigest.Algorithm(), manifestDigest.Hex(), index+1)
-	sigURL.Path = "ghcr.io/lukewarmtemp/fcos-signed:sha256-55ff09518c4d32129e7f05082d45b5a96c7d71f36eba3e2d1162d9197cd5236e.sig"
+	sigURL.Path = "lukewarmtemp/fcos-signed:sha256-55ff09518c4d32129e7f05082d45b5a96c7d71f36eba3e2d1162d9197cd5236e.sig"
 	return &sigURL
 }
