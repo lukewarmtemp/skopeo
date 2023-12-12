@@ -112,6 +112,7 @@ func (i *UnparsedImage) UntrustedSignatures(ctx context.Context) ([]signature.Si
 	log.Printf("HELLO0.1")
 	if i.cachedSignatures == nil {
 		log.Printf("HELLO0.2")
+		log.Printf("%v", i.src)
 		sigs, err := i.src.GetSignaturesWithFormat(ctx, i.instanceDigest)
 		log.Printf("%v", sigs)
 		if err != nil {
