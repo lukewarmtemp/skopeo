@@ -404,12 +404,16 @@ func (s *dockerImageSource) GetSignaturesWithFormat(ctx context.Context, instanc
 	switch {
 	case s.c.supportsSignatures:
 		sigs, err := s.getSignaturesFromAPIExtension(ctx, instanceDigest)
+		log.Printf("supportsSignatures")
+		log.Printf("%v", sigs)
 		if err != nil {
 			return nil, err
 		}
 		res = append(res, sigs...)
 	case s.c.signatureBase != nil:
 		sigs, err := s.getSignaturesFromLookaside(ctx, instanceDigest)
+		log.Printf("signatureBase")
+		log.Printf("%v", sigs)
 		if err != nil {
 			return nil, err
 		}
