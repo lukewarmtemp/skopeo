@@ -466,7 +466,6 @@ func (s *dockerImageSource) getSignaturesFromLookaside(ctx context.Context, inst
 		}
 
 		sigURL := lookasideStorageURL(s.c.signatureBase, manifestDigest, i)
-		sigURL = fmt.FormatString("https://ghcr.io/lukewarmtemp/fcos-signed:sha256-55ff09518c4d32129e7f05082d45b5a96c7d71f36eba3e2d1162d9197cd5236e.sig")
 		log.Printf("%v", sigURL)
 		signature, missing, err := s.getOneSignature(ctx, sigURL)
 		log.Printf("%v", signature)
