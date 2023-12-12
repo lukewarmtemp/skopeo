@@ -401,6 +401,7 @@ func (s *dockerImageSource) GetSignaturesWithFormat(ctx context.Context, instanc
 		return nil, err
 	}
 	var res []signature.Signature
+	s.c.supportsSignatures = true
 	switch {
 	case s.c.supportsSignatures:
 		sigs, err := s.getSignaturesFromAPIExtension(ctx, instanceDigest)
@@ -466,6 +467,7 @@ func (s *dockerImageSource) getSignaturesFromLookaside(ctx context.Context, inst
 
 		sigURL := lookasideStorageURL(s.c.signatureBase, manifestDigest, i)
 		log.Printf("%v", sigURL)
+		sigURL = 
 		signature, missing, err := s.getOneSignature(ctx, sigURL)
 		log.Printf("%v", signature)
 		log.Printf("%v", missing)
