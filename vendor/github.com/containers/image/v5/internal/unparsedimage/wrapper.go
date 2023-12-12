@@ -2,6 +2,7 @@ package unparsedimage
 
 import (
 	"context"
+	"log"
 
 	"github.com/containers/image/v5/internal/private"
 	"github.com/containers/image/v5/internal/signature"
@@ -26,6 +27,7 @@ func FromPublic(unparsed types.UnparsedImage) private.UnparsedImage {
 
 // UntrustedSignatures is like ImageSource.GetSignaturesWithFormat, but the result is cached; it is OK to call this however often you need.
 func (w *wrapped) UntrustedSignatures(ctx context.Context) ([]signature.Signature, error) {
+	log.Printf("HELLO0.1")
 	sigs, err := w.Signatures(ctx)
 	if err != nil {
 		return nil, err
