@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/containers/image/v5/signature/internal"
@@ -176,9 +177,9 @@ func (f *fulcioTrustRoot) verifyFulcioCertificateAtTime(relevantTime time.Time, 
 	}
 
 	// == Validate the OIDC subject
-	if !slices.Contains(untrustedCertificate.EmailAddresses, f.subjectEmail) && !slices.Contains(untrustedCertificate.EmailAddresses, f.URI) {
+	if !slices.Contains(untrustedCertificate.EmailAddresses, f.subjectEmail) && !strings.Contains(untrustedCertificate.URIs[0].String(), f.URI) {
 		log.Printf("TESTING IMAGE EMAIL")
-		log.Printf("%v", untrustedCertificate.URIs[0])
+		log.Printf("%v", untrustedCertificate.URIs[0].String())
 		log.Printf("%T", untrustedCertificate.URIs)
 		log.Printf("%v", f.URI)
 		return nil, internal.NewInvalidSignatureError(fmt.Sprintf("Required email %s not found (got %#v)",
