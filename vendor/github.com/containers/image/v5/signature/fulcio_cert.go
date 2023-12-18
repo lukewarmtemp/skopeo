@@ -21,14 +21,15 @@ type fulcioTrustRoot struct {
 	caCertificates *x509.CertPool
 	oidcIssuer     string
 	subjectEmail   string
+	URI            string
 }
 
 func (f *fulcioTrustRoot) validate() error {
 	if f.oidcIssuer == "" {
 		return errors.New("Internal inconsistency: Fulcio use set up without OIDC issuer")
 	}
-	if f.subjectEmail == "" {
-		return errors.New("Internal inconsistency: Fulcio use set up without subject email")
+	if f.subjectEmail == "" && f.URI == "" {
+		return errors.New("Internal inconsistency: Fulcio use set up without subject email or URI")
 	}
 	return nil
 }
