@@ -175,7 +175,7 @@ func (f *fulcioTrustRoot) verifyFulcioCertificateAtTime(relevantTime time.Time, 
 	}
 
 	// == Validate the OIDC subject
-	if !slices.Contains(untrustedCertificate.EmailAddresses, f.subjectEmail) {
+	if !slices.Contains(untrustedCertificate.EmailAddresses, f.subjectEmail) && !slices.Contains(untrustedCertificate.EmailAddresses, f.URI) {
 		return nil, internal.NewInvalidSignatureError(fmt.Sprintf("Required email %s not found (got %#v)",
 			f.subjectEmail,
 			untrustedCertificate.EmailAddresses))
