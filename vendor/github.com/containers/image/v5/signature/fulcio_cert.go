@@ -179,6 +179,7 @@ func (f *fulcioTrustRoot) verifyFulcioCertificateAtTime(relevantTime time.Time, 
 	if !slices.Contains(untrustedCertificate.EmailAddresses, f.subjectEmail) && !slices.Contains(untrustedCertificate.EmailAddresses, f.URI) {
 		log.Printf("TESTING IMAGE EMAIL")
 		log.Printf("%v", untrustedCertificate.URIs)
+		log.Printf("%T", untrustedCertificate.URIs)
 		log.Printf("%v", f.URI)
 		return nil, internal.NewInvalidSignatureError(fmt.Sprintf("Required email %s not found (got %#v)",
 			f.subjectEmail,
