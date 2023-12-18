@@ -25,11 +25,11 @@ const knownNotManifestListedImageX8664 = "docker://quay.io/coreos/11bot"
 // knownNotExtantImage would be very surprising if it did exist
 const knownNotExtantImage = "docker://quay.io/centos/centos:opensusewindowsubuntu"
 
-const signedImage = "docker://ghcr.io/jmpolom/fedora-silverblue-ws:38-main"
+// const signedImage = "docker://ghcr.io/jmpolom/fedora-silverblue-ws:38-main"
 
 // const signedImage = "docker://ghcr.io/ublue-os/kinoite-nvidia:38"
 
-// const signedImage = "docker://ghcr.io/lukewarmtemp/fcos-signed:latest"
+const signedImage = "docker://ghcr.io/lukewarmtemp/fcos-signed:latest"
 
 // const signedImage = "docker://quay.io/luyang/manual-fcos-signed:latest"
 
