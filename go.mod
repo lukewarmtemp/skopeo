@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/containers/common v0.57.1
-	github.com/containers/image/v5 v5.29.0
+	github.com/lukewarmtemp/image/v5 v5.29.0
 	github.com/containers/ocicrypt v1.1.9
 	github.com/containers/storage v1.51.0
 	github.com/docker/distribution v2.8.3+incompatible
@@ -132,4 +132,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/containers/image/v5 v5.29.0 => github.com/lukewarmtemp/image/v5 v5.0.0-20231220153417-11a68898aab6
+// replace github.com/containers/image/v5 v5.29.0 => github.com/lukewarmtemp/image/v5 v5.0.0-20231220153417-11a68898aab6
