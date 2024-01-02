@@ -2,7 +2,7 @@ module github.com/containers/skopeo
 
 go 1.19
 
-replace github.com/containers/image/v5 v5.29.0 => github.com/lukewarmtemp/image/v5 dev
+replace github.com/containers/image/v5 v5.29.0 => github.com/lukewarmtemp/image/v5 v5.0.0-20240102152243-b300964d224c
 
 require (
 	github.com/containers/common v0.57.1
